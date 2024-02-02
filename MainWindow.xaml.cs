@@ -1,26 +1,19 @@
 ﻿using GeekDesk.Constant;
 using GeekDesk.Control.Other;
 using GeekDesk.Control.UserControls.Config;
-using GeekDesk.Control.UserControls.PannelCard;
 using GeekDesk.Control.Windows;
 using GeekDesk.Interface;
 using GeekDesk.MyThread;
 using GeekDesk.Plugins.EveryThing;
-using GeekDesk.Plugins.EveryThing.Constant;
 using GeekDesk.Task;
 using GeekDesk.Util;
 using GeekDesk.ViewModel;
-using GeekDesk.ViewModel.Temp;
-using Microsoft.Win32;
 using NPinyin;
 using ShowSeconds;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,10 +21,6 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Shell;
-using System.Windows.Threading;
 using static GeekDesk.Util.ShowWindowFollowMouse;
 
 namespace GeekDesk
@@ -50,12 +39,12 @@ namespace GeekDesk
         public static int colorPickerHotKeyId = -1;
         public static MainWindow mainWindow;
 
-       
+
 
         private static bool dataFileExist = true;
         public MainWindow()
         {
-            
+
             //加载数据
             LoadData();
             InitializeComponent();
@@ -97,7 +86,8 @@ namespace GeekDesk
             if (appData.AppConfig.SearchType == SearchType.HOT_KEY && !RunTimeStatus.SEARCH_BOX_SHOW)
             {
                 ShowSearchBox();
-            } else if (RunTimeStatus.SEARCH_BOX_SHOW)
+            }
+            else if (RunTimeStatus.SEARCH_BOX_SHOW)
             {
                 HidedSearchBox();
             }
@@ -145,7 +135,7 @@ namespace GeekDesk
             {
                 RunTimeStatus.EVERYTHING_SEARCH_DELAY_TIME = 300;
                 if (!RunTimeStatus.EVERYTHING_NEW_SEARCH)
-                {                    
+                {
                     RunTimeStatus.EVERYTHING_NEW_SEARCH = true;
                     //显示搜索结果列表
                     RightCard.VisibilitySearchCard(Visibility.Visible);
@@ -161,7 +151,8 @@ namespace GeekDesk
                     }
                     SearchDelay();
                 }
-            } else
+            }
+            else
             {
                 //隐藏条目信息
                 SearchResContainer.Visibility = Visibility.Collapsed;
@@ -173,7 +164,7 @@ namespace GeekDesk
                     control.VerticalUFG.Visibility = Visibility.Collapsed;
                 }
             }
-            
+
         }
 
         private void SearchDelay()
@@ -203,7 +194,7 @@ namespace GeekDesk
 
                         if (appData.AppConfig.EnableEveryThing == true)
                         {
-                            ObservableCollection<IconInfo> iconBakList = EveryThingUtil.Search(inputText);                            
+                            ObservableCollection<IconInfo> iconBakList = EveryThingUtil.Search(inputText);
                             foreach (IconInfo icon in iconBakList)
                             {
                                 resList.Add(icon);
@@ -1079,11 +1070,13 @@ namespace GeekDesk
             {
                 PreviewGuideBtn.Visibility = Visibility.Collapsed;
                 NextGuideBtn.Content = "下一步";
-            } else if (index > 0 && index < GuideInfoList.mainWindowGuideList.Count - 1)
+            }
+            else if (index > 0 && index < GuideInfoList.mainWindowGuideList.Count - 1)
             {
                 PreviewGuideBtn.Visibility = Visibility.Visible;
                 NextGuideBtn.Content = "下一步";
-            } else
+            }
+            else
             {
                 NextGuideBtn.Content = "完成";
             }
@@ -1091,7 +1084,7 @@ namespace GeekDesk
             switch (index)
             {
                 default: //0  //右侧列表区域
-                    
+
                     Point point = RightCard.TransformToAncestor(this).Transform(new Point(0, 0));
                     //内部中上
                     GrayBoderClip(point.X, point.Y, RightCard.ActualWidth, RightCard.ActualHeight,
@@ -1099,7 +1092,7 @@ namespace GeekDesk
                     break;
                 case 1:  //左侧菜单
                     Point leftCardPoint = LeftCard.TransformToAncestor(this).Transform(new Point(0, 0));
-                    GrayBoderClip(leftCardPoint.X , leftCardPoint.Y , LeftCard.ActualWidth, LeftCard.ActualHeight,
+                    GrayBoderClip(leftCardPoint.X, leftCardPoint.Y, LeftCard.ActualWidth, LeftCard.ActualHeight,
                         // 外部中下侧
                         new Thickness(leftCardPoint.X + LeftCard.ActualWidth,
                         leftCardPoint.Y + LeftCard.ActualHeight / 2 - GuideCard.ActualHeight / 2, 0, 0));
@@ -1145,7 +1138,8 @@ namespace GeekDesk
 
         private void NextGuideBtn_Click(object sender, RoutedEventArgs e)
         {
-            if ("完成".Equals(NextGuideBtn.Content.ToString())) {
+            if ("完成".Equals(NextGuideBtn.Content.ToString()))
+            {
                 GrayBorder.Visibility = Visibility.Collapsed;
                 GuideCard.Visibility = Visibility.Collapsed;
                 guideIndex = 0;

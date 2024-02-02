@@ -1,7 +1,6 @@
 ﻿using GeekDesk.Util;
 using Gma.System.MouseKeyHook;
 using ShowSeconds.Common;
-using GeekDesk.Util;
 using ShowSeconds.ViewModel;
 using System;
 using System.Collections.Generic;
